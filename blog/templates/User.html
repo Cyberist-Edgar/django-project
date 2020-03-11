@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>auth.auUser</title>
+</head>
+<body>
+{% if user %}
+<table>
+<tr>
+    <th>username</th>
+    <td>{{ user.username }}</td>
+</tr>
+<tr>
+    <th>email</th>
+    <td>{{ user.email }}</td>
+</tr>
+<tr>
+    <th>date joined</th>
+    <td>{{ user.date_joined }}</td>
+</tr>
+</table>
+{% endif %}
+
+</body>
+</html>

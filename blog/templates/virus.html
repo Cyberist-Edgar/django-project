@@ -1,0 +1,52 @@
+{% extends 'base.html' %} {# 必须在第一行 #}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}
+    <title>疫情实时详情</title>
+    {% endblock %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/my.css' %}">
+    <link rel="icon" href="{% static 'images/favicon.png' %}">
+</head>
+<body>
+<br>
+{% block body%}
+<div class="container">
+
+<div>
+<h2 class="text-center">省份疫情详情</h2>
+<br/>
+<table class="table table-hover table-bordered">
+<tbody>
+<tr>
+<th>name</th>
+{#<th>ename</th>#}
+<th>value</th>
+<th>susNum</th>
+<th>deathNum</th>
+<th>cureNum</th>
+{#<th>city</th>#}
+</tr>
+
+{% for i in virus %}
+<tr>
+<td><a href="/virus/{{ i.ename }}" target="_blank">{{ i.name }}</a></td>
+{#<td>{{ i.ename }}</td>#}
+<td>{{ i.value }}</td>
+<td>{{ i.susnum }}</td>
+<td>{{ i.deathnum }}</td>
+<td>{{ i.curenum }}</td>
+{#<td>{{ i.city }}</td>#}
+</tr>
+{% endfor %}
+
+</tbody>
+</table>
+</div>
+</div>
+{% endblock %}
+</body>
+</html>

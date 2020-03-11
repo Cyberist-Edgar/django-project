@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}
+        <title>Home</title>
+    {% endblock %}
+    {% load static %}
+    <link rel="icon" href="{% static "images/favicon.png" %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+</head>
+<body>
+<div class="container">
+    {% block body %}
+        <div class="col-5 offset-4">
+        <form action="/user/login/" method="post"  style="margin-top: 40%">
+        {% csrf_token %}
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" name="username" autofocus required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="password" required >
+            </div>
+            <button type="submit" class="btn btn-outline-primary" style="margin-left: 36%">Login in</button>
+                    <small class="text-center  col-12">Forget your password ?</small>
+        </form>
+        </div>
+    {% endblock %}
+
+</div>
+</body>
+</html>

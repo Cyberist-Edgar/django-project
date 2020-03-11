@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload a file</title>
+    {% load static  %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+</head>
+<body class="container">
+<form enctype="multipart/form-data" action="/upload" method="post" class="my-md-5 col-4" >
+    {% csrf_token %}
+    <input type="file" name="file"  class="form-control form-inline">
+    <input type="submit"  class="form-control form-inline btn btn-outline-primary text-center my-md-5" value="upload">
+{% if messages %}
+{% for message in messages %}
+    <div class="alert-{{ message.tags }} alert">{{ message }}</div>
+    {% endfor %}
+{% endif %}
+</form>
+
+</body>
+</html>

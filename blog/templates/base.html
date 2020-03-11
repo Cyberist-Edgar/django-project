@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    {% block head %}
+        <meta charset="UTF-8">
+        <title></title>
+        <link rel="stylesheet" href="{% static "css/bootstrap.css" %}">
+        <link rel="icon" href="{% static "images/favicon.png" %}">
+    {% endblock %}
+
+</head>
+<body class="container">
+{% load static %}
+<nav class="navbar navbar-expand-sm navbar-light bg-light sticky-top">
+    <a class="navbar-brand mr-0 mr-md-0" href="#">
+        <img class="rounded-circle " src="{% static "images/favicon.png" %}" style="width: 34px" alt="">
+    </a>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+            <li class="nav-item offset-1">
+                <a class="nav-link" href="#">home</a>
+            </li>
+            <li class="nav-item offset-1">
+                <a class="nav-link" href="#">python</a>
+            </li>
+            <li class="nav-item offset-1">
+                <a class="nav-link" href="#">C/C++</a>
+            </li>
+            <li class="nav-item offset-1">
+                <a class="nav-link" href="#">Linux</a>
+            </li>
+            <li class="nav-item offset-1">
+                <a class="nav-link" href="#">Cyber&nbsp;Security</a>
+            </li>
+
+        </ul>
+        {% block form_inline %}
+
+        {% endblock %}
+    </div>
+</nav>
+
+
+{% block body %} {% endblock %}
+
+
+<footer class="text-center bd-footer fixed-bottom">
+    <ul class="list-inline">
+        <li class="list-inline-item">
+            <a class="card-link" href="#">blog</a>
+        </li>
+        <li class="list-inline-item">
+            <a class="card-link" href="#">github</a>
+        </li>
+        <li class="list-inline-item">
+            <a class="card-link" href="#">juejin</a>
+        </li>
+    </ul>
+</footer>
+</body>
+</html>

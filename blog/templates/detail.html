@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{detail.name}}疫情详情</title>
+    {% load static %}
+    <link rel="icon" href="{% static 'images/favicon.png' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+</head>
+<br/>
+<body class="container">
+<h2 class="text-center">{{ detail.name }}疫情详情</h2>
+<br/>
+<table class="table table-striped table-bordered">
+    <tr class="text-center">
+        <th>总确诊人数</th>
+        <th>疑似人数</th>
+        <th>死亡人数</th>
+        <th>治疗人数</th>
+        <th>下属城市</th>
+    </tr>
+    <tr class="text-center">
+        <td>{{ detail.value }}</td>
+        <td>{{ detail.susnum }}</td>
+        <td>{{ detail.deathnum }}</td>
+        <td>{{ detail.curenum }}</td>
+        <td>{{ detail.city }}</td>
+    </tr>
+</table>
+</body>
+</html>

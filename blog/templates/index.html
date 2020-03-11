@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+
+    <meta charset="UTF-8">
+    {% block head %}
+        <title>Home</title>
+        <link rel="icon" href="{% static "images/favicon.png" %}">
+        <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    {% endblock %}
+
+</head>
+<body>
+<div class="container">
+
+    {% block form_inline %}
+        <div class="row" style="position: absolute; right: 10%">
+            {% if not user is null %}
+                <img class="rounded rounded-circle nav-item" id="profile"
+                     src="{% static 'images/favicon.png' %}" style="width: 34px; cursor: pointer" alt="user"> {# 到时候改为用户的 #}
+
+                <div class="dropdown-menu" style="display: none;">
+                    <ul class="list-group ">
+                        <li class="list-inline-item"><a class=" dropdown-item" href="#">个人信息</a></li>
+                        <li class="list-inline-item "><a class="dropdown-item" href="#">上传文件</a></li>
+                        <li class="list-inline-item "><a class="dropdown-item" style="cursor: pointer" id="loginout">登出</a></li>
+                    </ul>
+                </div>
+            {% else %}
+                <ul class="row mt-3" style="font-size: 18px">
+                    <li class="list-inline-item list-unstyled" style="cursor: pointer">
+                        <a href="/user/login/">
+                            登录
+                        </a>
+                    </li>
+                    <li class="list-inline-item list-unstyled" style="cursor: pointer">
+                        <a href="/user/signup">
+                            注册
+                        </a>
+                    </li>
+                </ul>
+            {% endif %}
+        </div>
+    {% endblock %}
+
+
+    {% block body %}
+        <script src="{% static 'js/index.js' %}"></script>
+
+    {% endblock %}
+
+</div>
+
+</body>
+
+
+</html>

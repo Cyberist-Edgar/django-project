@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajax test</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <script>
+        function load() {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    var div = document.getElementById("ajax");
+                    var data = JSON.parse(xmlhttp.responseText).data;
+                    let temp = "";
+                    temp += "<table><tbody>";
+                    for(let i=0; i<data.length; i++){
+                        temp += "<tr>" + data[i].name + "\n</tr>";
+                    }
+                    temp += "</tbody></table>";
+                    console.log(temp);
+                    div.innerHTML = temp;
+                }
+            };
+            xmlhttp.open('GET', '/data', true);
+            xmlhttp.send();
+        }
+    </script>
+</head>
+<body>
+
+<div>
+    <button id="id" type="submit" onclick="load()">click</button>
+    <div id="ajax"></div>
+</div>
+
+</body>
+</html>
