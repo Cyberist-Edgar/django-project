@@ -4,10 +4,16 @@
 <head>
     <meta charset="UTF-8">
     {% block head %}
-    <title>个人资料中心</title>
+        <title>个人资料中心</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     {% endblock %}
-</head>
-<body>
 
+
+</head>
+<body class="container">
+{% block body %}
+{{ user.username }}
+{% endblock %}
 </body>
 </html>

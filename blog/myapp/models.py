@@ -22,3 +22,12 @@ class Virus(models.Model):
 class User(models.Model):
     username = models.CharField(primary_key=True, null=False, blank=False, max_length=30)
     password = models.CharField(null=False, blank=False, max_length=30)
+
+
+class File(models.Model):
+    """保存上传文件"""
+    id = models.BigAutoField(primary_key=True)
+    user = models.CharField(max_length=30)
+    fileName = models.CharField(max_length=200)
+    alia = models.CharField(max_length=200)
+    path = models.CharField(max_length=400)

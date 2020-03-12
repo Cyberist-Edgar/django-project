@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.contrib import auth, messages
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.sessions.models import Session
 from django.http import Http404
@@ -31,6 +32,7 @@ def login(request):
         raise Http404("error")
 
 
+@login_required()
 def loginout(request):
     if request.method == 'GET':
         Session.objects.all().delete()
@@ -100,3 +102,12 @@ def send_email(request):
         return render(request, 'email.html', locals())
     else:
         return render(request, 'email.html', locals())
+
+
+def profile(request):
+    """用户的个人信息页"""
+    if request.user.is_authenticated:
+        user = request.user
+        return render(request, 'profile.html', locals())
+    else:
+        return redirect('/user/login')

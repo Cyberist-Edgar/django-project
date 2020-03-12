@@ -7,15 +7,14 @@
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
 </head>
 <body class="container">
-<form enctype="multipart/form-data" action="/upload" method="post" class="my-md-5 col-4" >
+<form enctype="multipart/form-data" action="/upload/" method="post" class="my-md-5 col-4" >
     {% csrf_token %}
-    <input type="file" name="file"  class="form-control form-inline">
+    <input type="file" name="file"  class="form-control form-inline" required>
     <input type="submit"  class="form-control form-inline btn btn-outline-primary text-center my-md-5" value="upload">
-{% if messages %}
-{% for message in messages %}
-    <div class="alert-{{ message.tags }} alert">{{ message }}</div>
-    {% endfor %}
+{% if message %}
+    <div class="alert-{{ message.tags }} alert">{{ message.message }}</div>
 {% endif %}
+<div class="alert"></div>
 </form>
 
 </body>

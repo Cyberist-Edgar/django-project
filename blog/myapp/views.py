@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.shortcuts import HttpResponse
 from django.shortcuts import redirect  # 重导向
@@ -9,6 +10,9 @@ from django.contrib import auth
 from django.conf import settings
 from django.core.paginator import Paginator
 from django.http import JsonResponse
+from .models import File
+import os
+import time
 
 
 # Create your views here.
@@ -53,20 +57,34 @@ def sjtu(request):
 
 
 def upload(request):
-    if request.method == "POST":
-        upload_file = request.FILES.get('file')
-        if upload_file:
-            f = open(upload_file.name, "wb+")
-            for part in upload_file.chunks():
-                f.write(part)
-            f.close()
-        else:
-            messages.add_message(request, messages.WARNING, "Please choose a file first")
-    return render(request, 'upload.html', locals())
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            upload_file = request.FILES.get('file')
+            print(request.FILES)
+            if upload_file:
+                media = settings.MEDIA_URL
+                alia = time.strftime("%Y_%m_%d_%H_%M_%S_", time.localtime()) + upload_file.name  # 别名保存文件
+                file_path = os.path.join(os.path.join(media, 'files'), alia)
+                print(file_path)
+                file = File(user=request.user.username, fileName=upload_file.name, alia=alia, path=file_path)
+                f = open(file_path, "wb+")
+                for part in upload_file.chunks():
+                    f.write(part)
+                f.close()
+                file.save()
+                message = {"tags":"success", "message":"Upload successfully"}
+                request.FILES.clear()
+            else:
+                message = {"tags":"warning", "message":"Please choose a file first"}
+        return render(request, 'upload.html', locals())
+    else:
+        return redirect('/')
 
 
+@login_required
 def download(request):
-    return render(request, 'download.html')
+    files = File.objects.filter(user=request.user.username)
+    return render(request, 'download.html', locals())
 
 
 def page(request):

@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
 </head>
 <body class="container">
-<a href="/media/h.png" download="img" class="btn-bd-download btn btn-outline-primary">download</a>
+{% for file in files %}
+    <div>
+    <a class="btn-bd-download" href="/{{ file.path }}">{{file.fileName}}</a>
+    </div>
+{% endfor %}
 </body>
 </html>
