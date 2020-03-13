@@ -35,12 +35,14 @@ def login(request):
 
 @login_required()
 def loginout(request):
-    if request.method == 'GET':
-        Session.objects.all().delete()
-        # request.session['username'] = None
-    else:
-        return Http404('')
+    auth.logout(request)
     return redirect('/')
+    # if request.method == 'GET':
+    #     Session.objects.all().delete()
+    #     # request.session['username'] = None
+    # else:
+    #     return Http404('')
+    # return redirect('/')
 
 
 def signup(request):
