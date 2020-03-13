@@ -65,9 +65,9 @@ def signup(request):
                 user = User.objects.create_user(username=username, password=password)  # 创建一个新的用户
                 user.save()
                 messages.add_message(request, messages.SUCCESS, "创建成功")
+                return redirect(".")
             else:
                 messages.add_message(request, messages.INFO, "两次输入的密码不对")
-        print(username, password, confirm)
 
     return render(request, 'signup.html', locals())
 

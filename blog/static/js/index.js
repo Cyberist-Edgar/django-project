@@ -1,4 +1,6 @@
 "use strict";
+
+// index 界面的JavaScript
 const profile = document.getElementById('profile');
 const n = document.getElementsByTagName("nav")[0];
 
@@ -24,21 +26,5 @@ if (profile) {  // 说明用户已经登录
         }
     }
 
-}
-
-
-// 对用户的登出进行处理
-if (document.getElementById('loginout')) {
-    document.getElementById('loginout').onclick = function () {
-        let xmlhttp = new XMLHttpRequest();
-
-        xmlhttp.onreadystatechange = function () {
-            if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-                location.reload();
-            }
-        };
-        xmlhttp.open('GET', '/user/loginout', true);
-        xmlhttp.send();
-    }
 }
 

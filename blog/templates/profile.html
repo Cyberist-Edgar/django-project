@@ -13,7 +13,27 @@
 </head>
 <body class="container">
 {% block body %}
-{{ user.username }}
+    <div class="row">
+    <div class="col-3">
+        <ul class="list-inline list-group">
+            <li class="list-unstyled list-group-item">
+                {{ user.username }}
+            </li>
+            <li class="list-unstyled list-inline-item">
+                {{ user.email }}
+            </li>
+            <li class="list-unstyled">
+                上传的文件
+            </li>
+        </ul>
+    </div>
+    <div class="col-9">
+    <div>
+        hello welcome
+    </div>
+    </div>
+    </div>
+
 {% endblock %}
 </body>
 </html>

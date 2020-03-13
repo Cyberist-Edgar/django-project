@@ -19,13 +19,17 @@
         <div class="row" style="position: absolute; right: 10%">
             {% if not user is null %}
                 <img class="rounded rounded-circle nav-item" id="profile"
-                     src="{% static 'images/favicon.png' %}" style="width: 34px; cursor: pointer" alt="user"> {# 到时候改为用户的 #}
+                     src="{% static 'images/favicon.png' %}" style="width: 34px; cursor: pointer" alt="user">
+                {# 到时候改为用户的 #}
 
                 <div class="dropdown-menu" style="display: none;">
                     <ul class="list-group ">
-                        <li class="list-inline-item"><a class=" dropdown-item" href="/user/profile" target="_blank">个人信息</a></li>
-                        <li class="list-inline-item "><a class="dropdown-item" href="/upload" target="_blank">上传文件</a></li>
-                        <li class="list-inline-item "><a class="dropdown-item" style="cursor: pointer" id="loginout">登出</a></li>
+                        <li class="list-inline-item"><a class=" dropdown-item" href="/user/profile"
+                                                        target="_blank">个人信息</a></li>
+                        <li class="list-inline-item "><a class="dropdown-item" href="/upload" target="_blank">上传文件</a>
+                        </li>
+                        <li class="list-inline-item "><a class="dropdown-item" style="cursor: pointer"
+                                                         onclick="loginout()">登出</a></li>
                     </ul>
                 </div>
             {% else %}
@@ -48,7 +52,25 @@
 
     {% block body %}
         <script src="{% static 'js/index.js' %}"></script>
+        <script>
 
+            function loginout() {
+// 对用户的登出进行处理
+
+                    let xmlhttp = new XMLHttpRequest();
+
+                    xmlhttp.onreadystatechange = function () {
+                        if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+                            location.reload();
+                        }
+                    };
+                    xmlhttp.open('GET', '/user/loginout', true);
+                    xmlhttp.send();
+
+            }
+
+
+        </script>
     {% endblock %}
 
 </div>
