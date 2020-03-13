@@ -3,19 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>Upload a file</title>
-    {% load static  %}
+    {% load static %}
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
 </head>
 <body class="container">
-<form enctype="multipart/form-data" action="/upload/" method="post" class="my-md-5 col-4" >
+<form enctype="multipart/form-data" action="/upload/" method="post" class="my-md-5 mt-5  col-4" style="display: none">
     {% csrf_token %}
-    <input type="file" name="file"  class="form-control form-inline" required>
-    <input type="submit"  class="form-control form-inline btn btn-outline-primary text-center my-md-5" value="upload">
-{% if message %}
-    <div class="alert-{{ message.tags }} alert">{{ message.message }}</div>
-{% endif %}
-<div class="alert"></div>
-</form>
+    <input type="file" name="file" class="form-control form-inline btn-outline-primary btn" id="upload_file" >
 
+    <input type="submit" id="submit">
+    {% if message %}
+        <div class="alert-{{ message.tags }} alert">{{ message.message }}</div>
+    {% endif %}
+    <div class="alert"></div>
+</form>
+<div class="btn-group">
+    <button id="file" class="btn btn-outline-primary mt-2 ml-5">选择文件</button>
+
+    <button id="upload" class="btn btn-outline-primary mt-2 ml-5">上传</button>
+</div>
 </body>
+<script>
+    document.getElementById("file").onclick = function () {
+        document.getElementById("upload_file").click();
+    };
+
+    document.getElementById("upload").onclick = function () {
+        document.getElementById("submit").click();
+    }
+</script>
 </html>
