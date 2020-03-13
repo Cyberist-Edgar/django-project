@@ -9,27 +9,32 @@
 <body class="container">
 <form enctype="multipart/form-data" action="/upload/" method="post" class="my-md-5 mt-5  col-4" style="display: none">
     {% csrf_token %}
-    <input type="file" name="file" class="form-control form-inline btn-outline-primary btn" id="upload_file" >
-
+    <input type="file" name="file" class="form-control form-inline btn-outline-primary btn" id="upload_file">
     <input type="submit" id="submit">
-    {% if message %}
-        <div class="alert-{{ message.tags }} alert">{{ message.message }}</div>
-    {% endif %}
-    <div class="alert"></div>
 </form>
 <div class="btn-group">
     <button id="file" class="btn btn-outline-primary mt-2 ml-5">选择文件</button>
 
     <button id="upload" class="btn btn-outline-primary mt-2 ml-5">上传</button>
 </div>
+<div class="alert"></div>
+
 </body>
 <script>
+
     document.getElementById("file").onclick = function () {
         document.getElementById("upload_file").click();
     };
 
     document.getElementById("upload").onclick = function () {
-        document.getElementById("submit").click();
+        if (document.getElementById("upload_file").value) {  // 如果其中有文件
+            document.getElementById("submit").click();
+        } else {
+            let al = document.getElementsByClassName("alert")[0];
+            let html = "";
+            html += "<div class='alert alert-warning'>请选择需要上传的文件</div>"
+            al.innerHTML = html;
+        }
     }
 </script>
 </html>
