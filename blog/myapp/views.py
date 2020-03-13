@@ -1,13 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-from django.shortcuts import HttpResponse
 from django.shortcuts import redirect  # 重导向
 from .models import Virus
-from django.contrib.sessions.models import Session
-from django.contrib import messages
-from django.contrib.auth.models import User
-from django.contrib import auth
-from django.conf import settings
 from django.core.paginator import Paginator
 from django.http import JsonResponse
 from .models import File
@@ -70,7 +64,7 @@ def upload(request):
                     f.write(part)
                 f.close()
                 file.save()
-                message = {"tags": "success", "message":"Upload successfully"}
+                # message = {"tags": "success", "message":"Upload successfully"}
                 return redirect('.', locals())
             else:
                 message = {"tags":"warning", "message":"Please choose a file first"}
