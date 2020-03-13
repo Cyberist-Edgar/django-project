@@ -9,6 +9,7 @@ from django.core.mail import send_mail
 
 # Create your views here.
 
+
 def login(request):
     """登录页面"""
     try:
@@ -40,15 +41,6 @@ def loginout(request):
     else:
         return Http404('')
     return redirect('/')
-
-
-#
-# def user(request):
-#     if request.user.is_authenticated:  # 当用户已经在网页上登录
-#         user = request.user
-#     else:
-#         user = None
-#     return render(request, 'User.html', locals())
 
 
 def signup(request):

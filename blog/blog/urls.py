@@ -30,7 +30,8 @@ urlpatterns = [
     path("upload/", views.upload),
     path("download/", views.download),
     path("ajax/", views.ajax),
-    path('data/', views.data)
+    path('data/', views.data),
+    path('search/', views.search)
 ]
 
 

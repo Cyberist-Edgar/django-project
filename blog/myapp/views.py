@@ -1,12 +1,17 @@
 from django.contrib.auth.decorators import login_required
+from django.core import serializers
+from django.forms import model_to_dict
 from django.shortcuts import render
 from django.shortcuts import redirect  # 重导向
+from django.views.decorators.csrf import csrf_protect
+
 from .models import Virus
 from django.core.paginator import Paginator
 from django.http import JsonResponse
 from .models import File
 import os
 import time
+import json
 
 
 # Create your views here.
@@ -85,13 +90,24 @@ def page(request):
 
 
 def data(request):
-    virus = Virus.objects.values()
-    data = []
-    for i in virus:
-        data.append(i)
-    # data = [i for i in virus]
-    return JsonResponse({"data": data})
+    try:
+        query = request.POST.get("data").strip()
+        virus = Virus.objects.filter(name__contains=query).all()
+        data = []
+        if virus.exists():
+            for i in virus:
+                data.append(model_to_dict(i))
+        status = "success"
+    except:
+        status = 'fail'
+
+    return JsonResponse({"data": data, "status":status})
 
 
 def ajax(request):
     return render(request, 'ajax.html')
+
+
+@csrf_protect
+def search(request):
+    return render(request, 'search.html', locals())

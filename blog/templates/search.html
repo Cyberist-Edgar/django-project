@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+
+</head>
+<body>
+<div class="container">
+    <div class=""  style="margin-top: 30%; margin-left:10%; width: 80%;">
+        <form class="form-inline" style="height:55px">
+            {% csrf_token %}
+            <input id="search" oninput="post()" autocomplete="off" class="form-control w-50 mr-sm-2 h-100" type="text" placeholder="Search"
+                   aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0 h-100" type="submit">Search</button>
+
+        </form>
+       <div class=" mt-1 w-50 shadow" >
+            <ul class="list-group" id="info">
+            </ul>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+<script>
+    function post() {
+        let data = document.getElementById("search").value;
+        if (data.trim()) {
+            let info = document.getElementById("info");
+            info.innerHTML = "";
+            let xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    let receive = JSON.parse(xhr.responseText)["data"];  // 获取的信息
+                    let html = "";
+                    for (let i = 0; i < receive.length; i++) {
+                        html += "<li class=\"list-group-item \">" +"<a href=\"#\">"+ receive[i]["name"] +"</a>"+ "</li>";
+                    }
+                    info.innerHTML = html;
+
+
+                }
+            };
+            xhr.open("POST", '/data/', true);
+            let cookies = document.cookie.split(',');
+
+            let pattern = /csrftoken=(.*)/m;
+            let csrf;
+            for (let j = 0; j < cookies.length; j++) {
+                if (pattern.test(cookies[j])) {
+                    csrf = pattern.exec(cookies[j])[1];
+                }
+            }
+            xhr.setRequestHeader("X-CSRFToken", csrf);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+            xhr.send("data=" + data);
+        }{
+            info.innerHTML = "";
+        }
+    }
+
+</script>
+
+<script>
+    {#let info = document.getElementById("info");#}
+    {#let search = document.getElementById("search");#}
+    {#info.style.width = search.clientWidth + 'px';#}
+</script>
+
+</html>
