@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <title>Send a email to your friend</title>
     {% load  static %}
-    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}"
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="icon" href="{% static 'images/favicon.png' %}">
 </head>
 <body>
 <div class="container">
@@ -13,26 +14,19 @@
             {% csrf_token %}
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="text" class="form-control" id="email" name="email" autofocus required>
+                <input type="email" class="form-control" id="email" name="email" autofocus required autocomplete="off">
             </div>
-            {#        <div class="form-group">#}
-            {#                <label for="email">Email</label>#}
-            {#                <input type="email" class="form-control" id="email" name="email" required>#}
-            {#            </div>#}
-
             <div class="form-group">
                 <label for="subject">Subject</label>
-                <input type="subject" class="form-control" id="subject" name="subject" required>
+                <input type="text" class="form-control" id="subject" name="subject" required autocomplete="off">
             </div>
             <div class="form-group">
                 <label for="content">Content</label>
                 <textarea type="text" class="form-control" id="content" name="content" required></textarea>
             </div>
             <button type="submit" class="btn btn-outline-primary text-center">Send</button>
-            {% if messages %}
-                {% for message in messages %}
-                    <div class="mt-2 alert text-center  alert-{{ message.tags }}  col-12"> {{ message }}</div>
-                {% endfor %}
+            {% if message %}
+                    <div class="mt-2 alert text-center  alert-{{ message.tags }}  col-12"> {{ message.data }}</div>
             {% endif %}
         </form>
     </div>
