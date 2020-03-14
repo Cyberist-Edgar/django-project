@@ -1,5 +1,4 @@
 from django.contrib.auth.decorators import login_required
-from django.core import serializers
 from django.forms import model_to_dict
 from django.shortcuts import render
 from django.shortcuts import redirect  # 重导向
@@ -11,7 +10,6 @@ from django.http import JsonResponse
 from .models import File
 import os
 import time
-import json
 
 
 # Create your views here.
@@ -72,7 +70,7 @@ def upload(request):
                 # message = {"tags": "success", "message":"Upload successfully"}
                 return redirect('.', locals())
             else:
-                message = {"tags":"warning", "message":"Please choose a file first"}
+                message = {"tags": "warning", "message": "Please choose a file first"}
         return render(request, 'upload.html', locals())
     else:
         return redirect('/')
@@ -90,10 +88,10 @@ def page(request):
 
 
 def data(request):
+    data = []
     try:
         query = request.POST.get("data").strip()
         virus = Virus.objects.filter(name__contains=query).all()
-        data = []
         if virus.exists():
             for i in virus:
                 data.append(model_to_dict(i))
@@ -101,7 +99,7 @@ def data(request):
     except:
         status = 'fail'
 
-    return JsonResponse({"data": data, "status":status})
+    return JsonResponse({"data": data, "status": status})
 
 
 def ajax(request):
