@@ -80,12 +80,15 @@ def change_password(request):
         confirm = request.POST.get('new_password2')
         if username and password and confirm:
             user = User.objects.filter(username=username).all()
+            print(user)
             if user.exists():
                 user = user[0]
-                if password == user.password:
+                print(user.password)
+                if user.check_password(password):
                     if password == confirm:
                         message = {"data": "修改成功", "tags": "success"}
                         request.user.set_password(password)
+                        loginout(request)
                         return redirect("/user/login")
                     else:
                         message = {"data": "两次密码不正确", "tags": "warning"}
