@@ -10,7 +10,7 @@
 <body>
 <div class="container">
     <div class="col-5 offset-4">
-        <form action="." method="post" style="margin-top: 40%">
+        <form action="." method="post" style="margin-top: 40%" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="form-group">
                 <label for="email">Email</label>
@@ -24,13 +24,31 @@
                 <label for="content">Content</label>
                 <textarea type="text" class="form-control" id="content" name="content" required></textarea>
             </div>
+            <div class="form-group form-inline">
+                <label for="attach" class="mr-1"> 选择附件 </label>
+                <input id="attach" class="form-check" type="checkbox">
+                <input type="file" hidden id="file" name="file">
+            </div>
             <button type="submit" class="btn btn-outline-primary text-center">Send</button>
             {% if message %}
-                    <div class="mt-2 alert text-center  alert-{{ message.tags }}  col-12"> {{ message.data }}</div>
+                <div class="mt-2 alert text-center  alert-{{ message.tags }}  col-12"> {{ message.data }}</div>
             {% endif %}
         </form>
     </div>
 
 </div>
 </body>
+<script>
+    document.getElementById("attach").onclick = function () {
+        let file = document.getElementById("file");
+        if (document.getElementById("attach").checked) {
+            file.hidden = false;
+            file.required = true;
+        } else {
+            file.hidden = true;
+            file.required = false;
+        }
+    };
+
+</script>
 </html>

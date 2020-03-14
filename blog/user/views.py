@@ -6,6 +6,8 @@ from django.contrib.sessions.models import Session
 from django.http import Http404
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail
+from django.core.mail import EmailMultiAlternatives
+
 
 # Create your views here.
 
@@ -70,29 +72,53 @@ def forget_password(request):
     pass
 
 
+@login_required(login_url="/user/login")
 def change_password(request):
     if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        confirm = request.POST.get('confirm')
-        user = User.objects.filter(username=username)
-        if user:
-            if password == user.password:
-                if password == confirm:
-                    messages.add_message(request, messages.SUCCESS, '修改成功')
+        username = request.POST.get('old_password')
+        password = request.POST.get('new_password1')
+        confirm = request.POST.get('new_password2')
+        if username and password and confirm:
+            user = User.objects.filter(username=username).all()
+            if user.exists():
+                user = user[0]
+                if password == user.password:
+                    if password == confirm:
+                        message = {"data": "修改成功", "tags": "success"}
+                        request.user.set_password(password)
+                        return redirect("/user/login")
+                    else:
+                        message = {"data": "两次密码不正确", "tags": "warning"}
+                else:
+                    message = {"data": "密码不正确", "tags": "warning"}
+            else:
+                message = {"data": "不存在该用户", "tags": "warning"}
+        else:
+            message = {"data": "请填写每一空", "tags": "warning"}
+        return render(request, 'change.html', locals())
+    else:
+        return render(request, "change.html")
 
 
+@login_required(login_url="/user/login")
 def send_email(request):
     if request.method == 'POST':
         to = request.POST.get('email')
         subject = request.POST.get('subject')
         content = request.POST.get('content')
+        file = request.FILES.get("file")
         try:
-            send_mail(subject, content, from_email=settings.DEFAULT_FROM_EMAIL,recipient_list=["201648748@qq.com", "201648748@sjtu.edu.cn"])
-            messages.add_message(request, messages.SUCCESS, 'send successfully')
+            msg = EmailMultiAlternatives(subject, content, from_email=settings.DEFAULT_FROM_EMAIL
+                                         , to=[to])
+            msg.attach(file.name, file.read())
+            msg.send()
+            # send_mail(subject, content, from_email=settings.DEFAULT_FROM_EMAIL,
+            #           recipient_list=[to])
+            message = {"data": "发送成功", "tags": "success"}
+            return redirect('.')
         except Exception as e:
             print(e)
-            messages.add_message(request, messages.WARNING, 'failed')
+            message = {"data": "邮件发送失败", "tags": "warning"}
         return render(request, 'email.html', locals())
     else:
         return render(request, 'email.html', locals())
