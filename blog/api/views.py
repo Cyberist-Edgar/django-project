@@ -7,8 +7,6 @@ import random
 
 
 # Create your views here.
-
-
 @csrf_protect
 def email(request):
     if request.method == 'POST':
@@ -19,9 +17,12 @@ def email(request):
         data = {"status": "success", "code": rand}
         try:
             send_mail(subject, from_email=settings.DEFAULT_FROM_EMAIL, message=content, recipient_list=[to])
-        except:
+        except Exception as e:
+            print(e)
             data["status"] = "fail"
             data["code"] = None
+        else:
+            pass
         return JsonResponse(data)
     else:
         return render(request, 'email.html', locals())
