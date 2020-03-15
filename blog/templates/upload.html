@@ -5,22 +5,40 @@
     <title>Upload a file</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="icon" href="{% static 'images/favicon.png' %}">
 </head>
 <body class="container">
-<form enctype="multipart/form-data" action="/upload/" method="post" class="my-md-5 mt-5  col-4" style="display: none">
+<form enctype="multipart/form-data" action="{% url 'upload' %}" method="post" class="my-md-5 mt-5  col-4"
+      style="display: none">
     {% csrf_token %}
     <input type="file" name="file" class="form-control form-inline btn-outline-primary btn" id="upload_file">
     <input type="submit" id="submit">
 </form>
-<div class="btn-group">
-    <button id="file" class="btn btn-outline-primary mt-2 ml-5">选择文件</button>
-
+<div class="">
+    <div class="form-inline">
+        <button id="file" class="btn btn-outline-primary mt-2 ml-5">选择文件</button>
+        <div class="form-text ml-3" id="info"></div>
+    </div>
     <button id="upload" class="btn btn-outline-primary mt-2 ml-5">上传</button>
 </div>
 <div class="alert"></div>
 
 </body>
 <script>
+    document.getElementById("upload_file").onchange = function () {
+        let filename = document.getElementById("upload_file").value;
+        if (filename) {
+            let temp = '';
+            if (filename.includes("\\"))
+                temp = filename.split('\\');
+            else {
+                temp = filename.split("/");
+            }
+            document.getElementById("info").innerHTML = temp[temp.length - 1]
+        } else {
+            document.getElementsByClassName("text-info")[0].innerHTML = "";
+        }
+    };
 
     document.getElementById("file").onclick = function () {
         document.getElementById("upload_file").click();
