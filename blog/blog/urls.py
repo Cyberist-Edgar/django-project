@@ -20,20 +20,21 @@ from django.conf.urls.static import static
 
 from myapp import views
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('virus/<int:num>/', views.virus),
     path("", views.index),
     path('virus/<str:ename>/', views.virus_detail),
-    path('sjtu/', views.sjtu),
+    path('sjtu/', views.sjtu, name='sjtu'),
     path('user/', include('user.urls')),
-    path("upload/", views.upload),
-    path("download/", views.download),
-    path("ajax/", views.ajax),
-    path('data/', views.data),
-    path('search/', views.search)
+    path("upload/", views.upload, name='upload'),
+    path("download/", views.download, name='download'),
+    path("ajax/", views.ajax, name='ajax'),
+    path('data/', views.data, name='data'),
+    path('search/', views.search, name='search'),
+    path('api/', include("api.urls")),
 ]
-
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

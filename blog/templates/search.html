@@ -43,11 +43,9 @@
                         html += "<li class=\"list-group-item \">" +"<a href=\"#\">"+ receive[i]["name"] +"</a>"+ "</li>";
                     }
                     info.innerHTML = html;
-
-
                 }
             };
-            xhr.open("POST", '/data/', true);
+            xhr.open("POST", '{% url 'data' %}', true);
             let cookies = document.cookie.split(',');
 
             let pattern = /csrftoken=(.*)/m;

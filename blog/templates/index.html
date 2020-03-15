@@ -24,9 +24,9 @@
 
                 <div class="dropdown-menu" style="display: none;">
                     <ul class="list-group ">
-                        <li class="list-inline-item"><a class=" dropdown-item" href="/user/profile"
+                        <li class="list-inline-item"><a class=" dropdown-item" href="{% url 'user:profile' %}"
                                                         target="_blank">个人信息</a></li>
-                        <li class="list-inline-item "><a class="dropdown-item" href="/upload" target="_blank">上传文件</a>
+                        <li class="list-inline-item "><a class="dropdown-item" href="{% url 'upload' %}" target="_blank">上传文件</a>
                         </li>
                         <li class="list-inline-item "><a class="dropdown-item" style="cursor: pointer"
                                                          onclick="loginout()">登出</a></li>
@@ -35,12 +35,12 @@
             {% else %}
                 <ul class="row mt-3" style="font-size: 18px">
                     <li class="list-inline-item list-unstyled" style="cursor: pointer">
-                        <a href="/user/login/">
+                        <a href="{% url 'user:login' %}">
                             登录
                         </a>
                     </li>
                     <li class="list-inline-item list-unstyled" style="cursor: pointer">
-                        <a href="/user/signup">
+                        <a href="{% url 'user:signup' %}">
                             注册
                         </a>
                     </li>
@@ -64,7 +64,7 @@
                             location.reload();
                         }
                     };
-                    xmlhttp.open('GET', '/user/loginout', true);
+                    xmlhttp.open('GET', '{% url 'user:loginout' %}', true);
                     xmlhttp.send();
 
             }
