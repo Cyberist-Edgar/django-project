@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'myapp',
     'user',
+    'api',
 ]
 
 MIDDLEWARE = [
@@ -55,7 +56,7 @@ ROOT_URLCONF = 'blog.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, "templates")],
+        'DIRS': [os.path.join(BASE_DIR, "api/templates"),os.path.join(BASE_DIR, "templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -144,3 +145,7 @@ EMAIL_HOST_PASSWORD = 'cyberist123'  # 邮箱的授权码
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
+# 有关redis的配置
+REDIS_HOST = "localhost"
+REDIS_PORT = 6379
+REDIS_DB = 0
