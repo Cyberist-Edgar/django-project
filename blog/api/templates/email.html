@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Email</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+</head>
+<body>
+<div class="container">
+    <form action="/api/email/" method="POST">
+        {% csrf_token %}
+        <button type="submit">click</button>
+    </form>
+</div>
+</body>
+
+<script>
+    document.getElementsByTagName("button")[0].onclick = function () {
+        let xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                print();
+            }
+        };
+        xhr.open("POST", "/api/email/", true);
+        let cookies = document.cookie.split(',');
+
+        let pattern = /csrftoken=(.*)/m;
+        let csrf;
+        for (let j = 0; j < cookies.length; j++) {
+            if (pattern.test(cookies[j])) {
+                csrf = pattern.exec(cookies[j])[1];
+            }
+        }
+        xhr.setRequestHeader("X-CSRFToken", csrf);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+        let data = {
+            email: "201648748@qq.com",
+            subject:"注册邮箱验证"
+        };
+        xhr.send("email="+data.email+"&"+"subject="+data.subject);
+    }
+</script>
+
+</html>
