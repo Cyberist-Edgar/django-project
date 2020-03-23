@@ -1,0 +1,11 @@
+asgiref==3.2.3
+cffi==1.14.0
+cryptography==2.8
+Django==3.0.2
+pycparser==2.19
+PyMySQL==0.9.3
+pytz==2019.3
+PyYAML==5.3
+redis==3.4.1
+six==1.14.0
+sqlparse==0.3.0
