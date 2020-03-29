@@ -82,7 +82,7 @@ WSGI_APPLICATION = 'bbs.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3.bak'),
     }
 }
 
@@ -124,6 +124,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = "/static/"
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
+    os.path.join(BASE_DIR, "media")
 ]
 
 # 上传文件夹
@@ -131,3 +132,6 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True  # 关闭浏览器的时候清除session
+
+
+LOGIN_URL = "/user/login"

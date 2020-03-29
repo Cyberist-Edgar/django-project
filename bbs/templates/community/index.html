@@ -6,6 +6,16 @@
     <title>{% block title %}社区{% endblock %}</title>
 </head>
 <body>
+{% block content %}
+    <div class="container">
+        <div class="">
+            {% for post in posts %}
+                <li class="list-group-item"><a class="card-link"
+                                               href="{% url 'community:detail' post.id %}">{{ post.topic }}</a></li>
 
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
 </body>
 </html>

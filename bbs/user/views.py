@@ -20,6 +20,8 @@ def login(request):
             user = authenticate(username=username, password=password)  # 进行账号密码验证
             if user:  # 登录成功
                 auth_login(request, user)
+                if request.POST.get("next"):
+                    return redirect(request.POST.get("next"))
                 return redirect("/")
             else:
                 message = "密码错误，请重新输入"
@@ -45,12 +47,14 @@ def signup(request):
                 auth.save()
                 User(user=auth).save()
                 auth_login(request, auth)
+                if request.POST.get("next"):
+                    return redirect(request.POST.get("next"))
                 return redirect("/")
             else:
                 message = "两次密码不正确"
         else:
             message = "已存在该用户名"
-        return render(request, 'user/signup.html', context={"message":message})
+        return render(request, 'user/signup.html', context={"message": message})
     else:
         return render(request, 'user/signup.html')
 
@@ -66,3 +70,20 @@ def logout(request):
     """用户的登出"""
     auth_logout(request)
     return redirect("/")
+
+
+@login_required()
+def profile(request):
+    if request.method == "GET":
+        user = request.user
+        profile = User.objects.get(user=user).profile
+        return render(request, 'user/profile.html', context={"profile": profile})
+
+
+@login_required()
+def history(request):
+    return render(request, 'user/history.html')
+
+
+def file(request):
+    return render(request, 'user/file.html')

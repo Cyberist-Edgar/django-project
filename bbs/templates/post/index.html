@@ -6,6 +6,128 @@
     <title>{% block title %}发帖{% endblock %}</title>
 </head>
 <body>
+{% block content %}
+    <div class=" " style="margin-top: 100px">
+        <div id="toolbar" class="edy-tb ml-4 row">
+            <button class="edy-tb-cmd btn-outline btn" data-wysihtml-command="bold" title="Bold" unselectable="on">
+                <svg class="Zi Zi--FormatBold" fill="currentColor" viewBox="0 0 24 24" width="24" height="24">
+                    <path d="M9 17.025V13h4.418c1.19 0 2.415.562 2.415 2.012s-1.608 2.013-2.9 2.013H9zM9 7h4.336c1 0 1.814.888 1.814 2 0 .89-.814 2-1.814 2H9V7zm8.192 1.899a3.893 3.893 0 0 0-3.888-3.889S9.334 5 8.167 5C7 5 7 6.167 7 6.167v11.666C7 19 8.167 19 8.167 19l5.572.01c2.333 0 4.231-1.86 4.231-4.148a4.122 4.122 0 0 0-1.77-3.372 3.873 3.873 0 0 0 .992-2.591z"
+                          fill-rule="evenodd"></path>
+                </svg>
+            </button>
+            <button class="edy-tb-cmd" data-wysihtml-command="italic" title="Italic" unselectable="on">
+                <svg width="21" height="21" xmlns="http://www.w3.org/2000/svg">
+                    <g transform="translate(7 3)" fill="#1B2124">
+                        <path d="M2.926 14l1.765-8.912h-2.448l-1.743 8.912h2.426z" id="Shape"></path>
+                        <path d="M5.096.863c-.27-.242-.604-.363-1.007-.363-.401 0-.752.134-1.058.402-.306.268-.456.61-.456 1.029 0 .432.141.765.425 1 .284.237.625.353 1.025.353.418 0 .764-.143 1.049-.431.283-.288.426-.622.426-1 0-.418-.135-.749-.404-.99z"></path>
+                    </g>
+                </svg>
+            </button>
+            <button class="edy-tb-cmd" data-wysihtml-command="underline" title="Underline" unselectable="on">
+                <svg width="21" height="21" xmlns="http://www.w3.org/2000/svg">
+                    <title>
+                        Slice 1
+                    </title>
+                    <g transform="translate(6 5)" fill="#1B2124">
+                        <path d="M9.141-.5h-2.271v4.791c0 .291-.042.578-.132.862-.09.284-.217.535-.387.752-.17.219-.391.397-.662.536-.27.14-.581.209-.934.209-.365 0-.659-.072-.878-.217-.221-.146-.394-.33-.52-.554-.127-.223-.209-.475-.247-.754-.038-.278-.057-.544-.057-.798v-4.827h-2.268v5.444c0 .447.062.882.189 1.306.126.424.324.799.595 1.125.272.327.618.591 1.041.791.422.199.929.299 1.521.299.68 0 1.27-.168 1.768-.499.498-.333.849-.718 1.051-1.153h.037v1.397h2.154v-8.71z"></path>
+                        <rect y="11" width="11" height=".908"></rect>
+                    </g>
+                </svg>
+            </button>
 
+
+            <button class="edy-tb-cmd edy-tb-g" data-wysihtml-command="justifyLeft" title="Align left"
+                    unselectable="on">
+                <svg width="21" height="21" xmlns="http://www.w3.org/2000/svg">
+                    <g fill="none" stroke="currentColor">
+                        <path d="M4 5.5h11"></path>
+                        <path d="M4 7.5h9"></path>
+                        <path d="M4 9.5h12"></path>
+                        <path d="M4 11.5h8"></path>
+                        <path d="M4 13.5h11"></path>
+                        <path d="M4 15.5h5"></path>
+                    </g>
+                </svg>
+            </button>
+
+            <button class="edy-tb-cmd" data-wysihtml-command="justifyCenter" title="Align center"
+                    unselectable="on">
+                <svg width="21" height="21" xmlns="http://www.w3.org/2000/svg">
+                    <g fill="none" stroke="currentColor">
+                        <path d="M5 5.5h11"></path>
+                        <path d="M6 7.5h9"></path>
+                        <path d="M4 9.5h13"></path>
+                        <path d="M7 11.5h7"></path>
+                        <path d="M5 13.5h11"></path>
+                        <path d="M8 15.5h5"></path>
+                    </g>
+                </svg>
+            </button>
+
+            <button class="edy-tb-cmd" data-wysihtml-command="justifyRight" title="Align right" unselectable="on">
+                <svg width="21" height="21" xmlns="http://www.w3.org/2000/svg">
+                    <g fill="none" stroke="currentColor">
+                        <path d="M5 5.5h11"></path>
+                        <path d="M7 7.5h9"></path>
+                        <path d="M4 9.5h12"></path>
+                        <path d="M8 11.5h8"></path>
+                        <path d="M5 13.5h11"></path>
+                        <path d="M11 15.5h5"></path>
+                    </g>
+                </svg>
+            </button>
+
+            <button class="edy-tb-cmd edy-tb-g" data-wysihtml-command="insertUnorderedList"
+                    title="Insert bulleted list" unselectable="on">
+                <svg width="21" height="21" xmlns="http://www.w3.org/2000/svg">
+                    <g transform="translate(2 3)" fill="#1B2124">
+                        <circle id="Oval" cx="1.5" cy="12.5" r="1.5"></circle>
+                        <circle id="Oval" cx="1.5" cy="2.5" r="1.5"></circle>
+                        <circle cx="1.5" cy="7.5" r="1.5"></circle>
+                        <path d="M6.5 2.5h9" id="Line" stroke="#1B2124"></path>
+                        <path d="M6.5 12.5h9" stroke="#1B2124"></path>
+                        <path d="M6.5 7.5h9" stroke="#1B2124"></path>
+                    </g>
+                </svg>
+            </button>
+
+            <button class="edy-tb-cmd" data-wysihtml-command="insertOrderedList" title="Insert numbered list"
+                    unselectable="on">
+                <svg width="21" height="21" xmlns="http://www.w3.org/2000/svg">
+                    <g transform="translate(2 3)" fill="none">
+                        <path d="M2.933 4.437v-4.437h-.96l-1.459 1.071.545.746.827-.639v3.259h1.047z" id="Shape"
+                              fill="#1B2124"></path>
+                        <path d="M3.747 9.659v-.915h-1.811l1.028-.914.292-.28c.094-.094.177-.194.25-.304.073-.108.13-.227.172-.354.042-.127.063-.27.063-.429 0-.229-.044-.43-.134-.602-.09-.171-.21-.313-.361-.426-.15-.113-.321-.197-.514-.251-.192-.053-.391-.081-.595-.081-.218 0-.423.033-.617.098s-.367.16-.518.283c-.15.125-.274.274-.373.451-.098.177-.159.377-.184.603l1.008.138c.021-.2.087-.362.198-.485.111-.124.254-.185.429-.185.167 0 .301.049.401.146.1.098.15.227.15.385 0 .134-.033.255-.101.363-.066.109-.154.214-.262.32l-1.729 1.563v.876h3.208z"
+                              id="Shape" fill="#1B2124"></path>
+                        <path d="M3.703 13.238c-.042-.109-.1-.211-.176-.301-.075-.09-.165-.166-.269-.23-.104-.064-.219-.111-.345-.141v-.021c.217-.06.396-.172.536-.342.14-.169.209-.377.209-.624 0-.213-.045-.398-.135-.557-.09-.157-.208-.287-.354-.392-.146-.105-.313-.183-.499-.233-.186-.049-.377-.074-.573-.074-.184 0-.364.023-.539.072-.175.047-.337.117-.486.213-.148.095-.276.211-.385.352-.109.141-.19.305-.244.491l.977.226c.034-.148.105-.271.216-.359.111-.09.242-.135.392-.135.146 0 .276.043.389.125.113.086.169.207.169.366 0 .109-.022.198-.066.267-.044.066-.103.119-.175.16l-.248.082-.289.021h-.305v.767h.282l.326.026c.108.021.206.051.292.095.085.044.154.104.206.18.052.074.079.168.079.28 0 .105-.021.193-.06.265-.039.07-.089.127-.15.172l-.207.097-.229.032c-.201 0-.366-.057-.495-.167-.129-.11-.215-.238-.257-.384l-.977.256c.058.209.146.388.263.535.117.147.254.271.41.363.157.094.331.164.521.211.19.045.385.068.586.068.205 0 .406-.027.604-.084.198-.057.377-.143.536-.257.159-.114.287-.261.385-.438.099-.177.147-.388.147-.629.001-.125-.02-.242-.062-.354z"
+                              fill="#1B2124"></path>
+                        <path d="M6.5 2.5h9" id="Line" stroke="#1B2124"></path>
+                        <path d="M6.5 12.5h9" id="Line" stroke="#1B2124"></path>
+                        <path d="M6.5 7.5h9" stroke="#1B2124"></path>
+                    </g>
+                </svg>
+            </button>
+
+        </div>
+        <div class="w-100 row mb-1"></div>
+        <div id="editor" class="w-50 left border-0 bg-transparent overflow-hidden" style="border:none">
+            <label>
+                <textarea class="" placeholder="Enter text here ..">dd</textarea>
+            </label>
+        </div>
+    </div>
+
+    {% load static %}
+        <script src="{% static 'js/wysihtml.js' %}"></script>
+    <script src="{% static 'js/wysihtml.toolbar.js' %}"></script>
+    <script src="{% static 'js/advanced_and_extended.js' %}"></script>
+    <script>
+        var editor = new wysihtml.Editor('editor', {
+            toolbar: 'toolbar',
+            parserRules: wysihtmlParserRules
+        });
+    </script>
+
+{% endblock %}
 </body>
 </html>
